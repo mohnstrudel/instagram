@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    %title Instagram
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+  / Navigation Bar
+  %nav.navbar.navbar-light.bg-light.d-flex
+    .container
+      .logo
+        %a.navbar-brand{href: "#"}
+          =fa_stacked_icon "camera inverse", base: "circle"
+          Instagram
+      .m-auto
+        %form{class: "form-inline search-form"}
+          %input.form-control.mr-sm-2{type: "search", placeholder: "@search", "aria-label" => "Search"}
+      .user-section
+        %a
+          %i.fa.fa-compass
+        %a
+          %i.fa.fa-heart
+        -if user_signed_in?
+          %a{ href: "#{user_path(current_user)}" }
+            %i.fa.fa-user
+        -else
+          %a{ href: "#{new_user_session_path}" }
+            %i.fa.fa-sign-in
+
+  / Main content
+  %main.container{style: "min-height: 500px;"}
+    = yield
+
+  / Footer
+  %footer.container.footer
+    %nav.navbar.d-flex
+      %ul
+        %li ABOUT US
+        %li SUPPORT
+        %li PRESS
+        %li API
+        %li JOBS
+        %li PRIVACY
+        %li TERMS
+        %li DIRECTORY
+        %li PROFILES
+        %li HASHTAGS
+        %li LANGUAGE
+      %p © 2019 HANDSOMECAKE
